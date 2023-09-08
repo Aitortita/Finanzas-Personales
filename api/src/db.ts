@@ -5,10 +5,15 @@ const { DB_CONN_STRING } = process.env;
 
 
 export const connectDB = async () => {
-    try {
-      const db = await mongoose.connect(DB_CONN_STRING as string);
-      console.log("Mongodb is connected to", db.connection.host);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  try {
+    const db = await mongoose.connect(DB_CONN_STRING as string,
+      {
+        useNewUrlParser: true,
+        ssl: true,
+      }
+    );
+    console.log("Mongodb is connected to", db.connection.host);
+  } catch (error) {
+    console.error(error);
+  }
+};
